@@ -23,17 +23,22 @@ router.get('/:id?', function (req, res, next) {
   	}
 });
 
-router.post('/', function (req, res, next) {
-	task.add(req.body, function (err, count) {
+router.post('/add/', function (req, res) {
+
+	console.log(req);
+	console.log(req.body.title);
+	console.log(req.body.status);
+
+	task.add(req.body, function (err) {
     	if (err) {
       		res.json(err);
     	} else {
-      		res.json(req.body); //or return count for 1 &amp;amp;amp; 0
+      		res.json(req.body);
     	}
   	});
 });
 
-router.delete('/:id', function (req, res, next) {
+router.delete('/delete/:id', function (req, res, next) {
 	task.deleted(req.params.id, function (err, count) {
     	if (err) {
       		res.json(err);
@@ -43,7 +48,7 @@ router.delete('/:id', function (req, res, next) {
   	});
 });
 
-router.put('/:id', function (req, res, next) {
+router.put('/update/:id', function (req, res, next) {
 	task.update(req.params.id, req.body, function (err, rows) {
     	if (err) {
       		res.json(err);
