@@ -10,8 +10,7 @@ var task = {
     },
 
     add:function(task, callback){
-       
-        return db.query("INSERT INTO task VALUES(?, ?)",[task.title, task.status], callback);
+        return db.query("INSERT INTO task (title, status) VALUES(?, ?)",[task.title, task.status], callback);
     },
 
     deleted:function(id, callback){
@@ -19,7 +18,7 @@ var task = {
     },
 
     update:function(id, task, callback){
-        return db.query("UPDATE task SET title=?, Status=? WHERE id=?",[task.title, task.status, id], callback);
+        return db.query("UPDATE task SET title=?, status=? WHERE id=?",[task.title, task.status, id], callback);
     }
 };
 

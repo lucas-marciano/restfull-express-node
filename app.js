@@ -1,17 +1,23 @@
-//Prefix API
-const apiPrefix = '/api/v1';
-
 // Imports
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-var cors = require('cors');
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var tasks = require('./routes/tasks');
-var app = express();
+var createError   = require('http-errors');
+var express       = require('express');
+var path          = require('path');
+var cookieParser  = require('cookie-parser');
+var logger        = require('morgan');
+var cors          = require('cors');
+var bodyParser    = require('body-parser');
+var app           = express();
+
+//routes
+var indexRouter   = require('./routes/index');
+var usersRouter   = require('./routes/users');
+var tasks         = require('./routes/tasks');
+
+//Prefix API
+var apiPrefix = '/api/v1';
+
+//midleware
+app.use(bodyParser.json());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -26,6 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(apiPrefix +'/', indexRouter);
 app.use(apiPrefix + '/users', usersRouter);
 app.use(apiPrefix +'/tasks', tasks);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
