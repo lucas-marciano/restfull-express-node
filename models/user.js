@@ -1,8 +1,8 @@
 var db = require('../dbconnection');
 
 var user = {
-    login: function(email, password, callback){
-        return db.query("SELECT * FROM users WHERE email = ? AND password = ?", [email, password], callback);
+    login: function(user, callback){
+        return db.query("SELECT * FROM users WHERE email = ? AND password = ?", [user.email, user.password], callback);
     },
     
     getAll: function(callback){

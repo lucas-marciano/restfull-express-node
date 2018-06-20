@@ -23,12 +23,32 @@ router.get('/:id?', function (req, res, next) {
 	}
 });
 
-router.get('/:email/:password', function (req, res, next) {
-	user.login(req.params.email, req.params.password, function (err, rows) {
+router.delete('/delete/:id', function (req, res, next) {
+	user.deleted(req.params.id, function (err, count) {
     	if (err) {
       		res.json(err);
     	} else {
-     		res.json(rows);
+     		res.json(count);
+    	}
+  	});
+});
+
+router.put('/update/:id', function (req, res, next) {
+	user.update(req.params.id, req.body, function (err, rows) {
+    	if (err) {
+      		res.json(err);
+    	} else {
+      		res.json(rows);
+    	}
+  	});
+});
+
+router.post('/login/', function (req, res) {
+	user.login(req.body, function (err) {
+    	if (err) {
+      		res.json(err);
+    	} else {
+      		res.json(req.body);
     	}
   	});
 });

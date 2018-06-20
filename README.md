@@ -6,7 +6,7 @@ Follows the commands to build your first Rest Api:
 * Configure the `dbconnection.js` file, with the dates of your database;
 * Run the commando `npm start` to run your local server.
 
-*OBS: Any changes made in the API, it is necessary to rerun the above command, only so your API will notice the changes.*
+**OBS: Any changes made in the API, it is necessary to rerun the above command, only so your API will notice the changes.**
 
 TECHNOLOGIES USED
 ------
