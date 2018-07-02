@@ -23,6 +23,10 @@ var user = {
 
     update:function(id, user, callback){
         return db.query("UPDATE users SET name=?, email=?, password=? WHERE id=?",[user.name, user.email, user.password, id], callback);
+    },
+
+    avatar:function(id, path, callback){
+        return db.query("UPDATE users SET avatar=? WHERE id=?",[path, id], callback);
     }
 };
 

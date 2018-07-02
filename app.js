@@ -1,23 +1,26 @@
 // Imports
-var createError   = require('http-errors');
-var express       = require('express');
-var path          = require('path');
-var cookieParser  = require('cookie-parser');
-var logger        = require('morgan');
-var cors          = require('cors');
-var bodyParser    = require('body-parser');
-var app           = express();
+const createError   = require('http-errors');
+const express       = require('express');
+const path          = require('path');
+const cookieParser  = require('cookie-parser');
+const logger        = require('morgan');
+const cors          = require('cors');
+const bodyParser    = require('body-parser');
+const fileUpload    = require('express-fileupload');
+const app           = express();
 
 //routes
-var indexRouter   = require('./routes/index');
-var usersRouter   = require('./routes/users');
-var tasks         = require('./routes/tasks');
+const indexRouter   = require('./routes/index');
+const usersRouter   = require('./routes/users');
+const tasksRouter   = require('./routes/tasks');
+const uploadRouter  = require('./routes/upload');
 
 //Prefix API
-var apiPrefix = '/api/v1';
+const apiPrefix = '/api/v1';
 
 //midleware
 app.use(bodyParser.json());
+app.use(fileUpload());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -29,10 +32,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(apiPrefix +'/', indexRouter);
+app.use(apiPrefix +'/',       indexRouter);
 app.use(apiPrefix + '/users', usersRouter);
-app.use(apiPrefix +'/tasks', tasks);
-
+app.use(apiPrefix +'/tasks',  tasksRouter);
+app.use(apiPrefix +'/upload', uploadRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

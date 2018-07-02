@@ -1,6 +1,6 @@
-var express = require('express');
-var user 	= require('../models/user');
-var router 	= express.Router();
+const express 	= require('express');
+const user 		= require('../models/user');
+const router 	= express.Router();
 
 router.get('/:id?', function (req, res, next) {
 	if (req.params.id) {
@@ -43,12 +43,12 @@ router.put('/update/:id', function (req, res, next) {
   	});
 });
 
-router.post('/login/', function (req, res) {
-	user.login(req.body, function (err) {
+router.post('/login/', function (req, res, next) {
+	user.login(req.body, function (err, rows) {
     	if (err) {
       		res.json(err);
     	} else {
-      		res.json(req.body);
+      		res.json(rows);
     	}
   	});
 });
